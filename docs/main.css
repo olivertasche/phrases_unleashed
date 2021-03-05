@@ -33,9 +33,9 @@ ul > li:before {
 }
 
 .container {
+    display: inline-block;
     background: #39284c;
     padding: 36px;
-    min-width: 944px;
 }
 
 .box {
