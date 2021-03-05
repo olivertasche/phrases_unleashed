@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let avatar = document.querySelector('#avatar');
     let avatarList = document.querySelector('#list');
 
-    avatar.src = storage.getItem('avatar') ?? '.png';
+    avatar.src = storage.getItem('avatar') ?? 'avatar/unknown.png';
     avatar.addEventListener('click', (event) => {
         avatarList.style.display = 'inline-block';
         event.stopPropagation();
