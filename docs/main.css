@@ -12,7 +12,7 @@ body {
 }
 
 .info {
-    padding: 36px 36px 0 36px;
+    padding: 20px;
 }
 
 h1 {
@@ -35,7 +35,8 @@ ul > li:before {
 .container {
     display: inline-block;
     background: #39284c;
-    padding: 36px;
+    padding: 20px;
+    min-width: 600px;
 }
 
 .box {
@@ -79,7 +80,7 @@ ul > li:before {
 }
 
 .download {
-    padding: 0 36px 36px 36px;
+    padding: 20px;
 }
 
 #download {
