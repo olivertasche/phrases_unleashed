@@ -1,0 +1,185 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #39284c;
+    font-family: 'Rubik', sans-serif;
+    color: #fff;
+    font-size: 26px;
+}
+
+.info {
+    padding: 36px 36px 0 36px;
+}
+
+h1 {
+    margin: 0;
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul > li:before {
+    content: '- ';
+}
+
+.container {
+    background: #39284c;
+    padding: 36px;
+    min-width: 944px;
+}
+
+.box {
+    display: inline-block;
+    background: #3d517a;
+    border-radius: 16px;
+    padding: 6px 22px;
+    max-width: 900px;
+}
+
+.user {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.avatar {
+    cursor: pointer;
+}
+
+.name {
+    display: inline-block;
+    vertical-align: top;
+    margin: 18px 14px 0 20px;
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: 40px;
+    transition: .4s;
+}
+
+.message {
+    display: inline-block;
+    margin: 14px 0;
+    padding: 10px 14px;
+    background: #393959;
+    border-style: solid;
+    border-color: #323057;
+    border-width: 2px 3px 4px 3px;
+    border-radius: 12px;
+    vertical-align: top;
+    font-family: 'Rubik', apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+}
+
+.download {
+    padding: 0 36px 36px 36px;
+}
+
+#download {
+    padding: 8px;
+    background: #393959;
+    border-top: 3px solid #625a7a;
+    border-bottom: 5px solid #322132;
+    border-left: 3px solid #393959;
+    border-right: 3px solid #393959;
+    border-radius: 8px;
+    box-shadow: 0 0 0 2px #17022e, 0 0 2px 2px #000;
+    font-family: 'Rubik', sans-serif;
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    outline: none;
+}
+
+#download:active {
+    background: #6d6ac3;
+    border-top: 8px solid #47478b;
+    border-bottom: 0px solid #6d6ac3;
+    border-left: 3px solid #6d6ac3;
+    border-right: 3px solid #6d6ac3;
+}
+
+.pink {
+    color: #eb37d2;
+}
+
+a {
+    color: #5eace2;
+    text-decoration: none;
+}
+
+#name, #message {
+    outline: none;
+}
+
+.list {
+    position: fixed;
+    top: 36px;
+    left: 36px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 10px;
+    max-width: calc(100vw - 100px);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.list img {
+    margin: 6px;
+    max-width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    top: 2px;
+    width: 56px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    background: #bdbdbd;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background: #fafafa;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background: #eb37d2;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
