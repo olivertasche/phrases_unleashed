@@ -57,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#download').addEventListener('click', () => {
         new RenderImage();
     });
+
+    if (window.location.search == '?mono') {
+        document.querySelector('.message').style.fontFamily = 'Roboto Mono';
+    }
 });
 
 class RenderImage {
