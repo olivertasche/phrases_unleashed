@@ -16,9 +16,9 @@ body {
 }
 
 h1 {
-    margin: 0;
+    margin: 0 0 8px 0;
     font-family: 'Mouse Memoirs', sans-serif;
-    font-size: 40px;
+    font-size: 44px;
     font-weight: normal;
 }
 
@@ -60,9 +60,9 @@ ul > li:before {
 .name {
     display: inline-block;
     vertical-align: top;
-    margin: 18px 14px 0 20px;
+    margin: 16px 14px 0 20px;
     font-family: 'Mouse Memoirs', sans-serif;
-    font-size: 40px;
+    font-size: 44px;
     transition: .4s;
 }
 
