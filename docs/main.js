@@ -107,7 +107,9 @@ class RenderImage {
 
         // Generate basic canvas
         let canvas = document.querySelector('#canvas');
-        canvas.width = containerBounding.width;
+        canvas.width = boxBounding.width
+            + parseInt(containerStyles.getPropertyValue('padding-left'), 10)
+            + parseInt(containerStyles.getPropertyValue('padding-right'), 10);
         canvas.height = containerBounding.height;
 
         let context = canvas.getContext('2d');
