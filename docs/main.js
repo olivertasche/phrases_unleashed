@@ -1,92 +1,159 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+    let params = new URLSearchParams(window.location.search.toLowerCase());
     let storage = window.localStorage;
 
-    stringHandler('name', 'Playername');
-    stringHandler('message', 'Don\'t be rude!');
-
-    function stringHandler(selector, fallback) {
-        let element = document.querySelector('#' + selector);
-        element.innerText = storage.getItem(selector) ?? fallback;
-        element.addEventListener('input', (event) => {
-            storage.setItem(selector, event.target.innerText);
-        });
-    }
-
-    let name = document.querySelector('.name');
-    let pinkToggle = document.querySelector('#pinkToggle');
-
-    pinkToggle.checked = storage.getItem('pink') == 'true';
-    pinkToggle.addEventListener('change', function() {
-        storage.setItem('pink', this.checked ? 'true' : 'false');
-        togglePink(this.checked);
-    });
-
-    togglePink(pinkToggle.checked);
-
-    function togglePink(active) {
-        if (active) {
-            name.classList.add('pink');
-        } else {
-            name.classList.remove('pink');
-        }
-    }
-
     let avatar = document.querySelector('#avatar');
-    let avatarList = document.querySelector('#list');
+    let avatarLayer = document.querySelector('#avatar-layer');
+    let avatarList = document.querySelector('#avatar-list');
+
+    let name = document.querySelector('#name');
+    let message = document.querySelector('#message');
+
+    let pink = document.querySelector('#pink');
+    let styles = document.querySelectorAll('.style');
 
     avatar.src = storage.getItem('avatar') ?? 'avatar/unknown.png';
-    avatar.addEventListener('click', (event) => {
-        avatarList.style.display = 'inline-block';
-        event.stopPropagation();
+    avatar.addEventListener('click', function() {
+        if (this.classList.contains('disabled')) { return; }
+        avatarLayer.classList.add('visible');
+    });
+
+    avatarLayer.addEventListener('click', function() {
+        avatarLayer.classList.remove('visible');
     });
 
     for (let i = 0; i < avatarList.children.length; i++) {
-        avatarList.children[i].addEventListener('click', (event) => {
-            avatar.src = event.target.src;
-            storage.setItem('avatar', event.target.src);
-            avatarList.style.display = 'none';
+        avatarList.children[i].addEventListener('click', function() {
+            let src = this.querySelector('img').src;
+            avatar.src = src;
+            storage.setItem('avatar', src);
         });
     }
 
-    document.querySelector('body').addEventListener('click', () => {
-        avatarList.style.display = 'none';
+    name.value = storage.getItem('name') ?? '';
+    name.addEventListener('change', function() {
+        if (this.classList.contains('disabled')) { return; }
+        storage.setItem('name', this.value);
     });
 
-    document.querySelector('#download').addEventListener('click', () => {
-        new RenderImage();
+    message.value = storage.getItem('message') ?? '';
+    message.addEventListener('change', function() {
+        storage.setItem('message', this.value);
     });
 
-    if (window.location.search == '?mono') {
-        document.querySelector('.message').style.fontFamily = 'Roboto Mono';
+    pink.checked = storage.getItem('pink') == 'true';
+    pink.addEventListener('change', function() {
+        storage.setItem('pink', this.checked ? 'true' : 'false');
+    });
+
+    styles.forEach((style) => {
+        style.checked = storage.getItem('style') == style.value;
+        style.addEventListener('change', function() {
+            if (this.checked) {
+                storage.setItem('style', this.value);
+            }
+        });
+    });
+
+    let generate = document.querySelector('#generate');
+    generate.addEventListener('click', function() {
+        new RenderImage(
+            avatar.src,
+            name.value,
+            message.value,
+            pink.checked,
+            document.querySelector('input.style:checked').value,
+            !params.has('debug')
+        );
+    });
+
+    if (params.has('debug')) {
+        Object.assign(document.querySelector('.render').style, { display: 'block', position: 'relative', left: 0 });
+        Object.assign(document.querySelector('#canvas').style, { display: 'block', position: 'absolute', top: 0, left: 0, zIndex: 1 });
+        Object.assign(document.querySelector('#preview').style, { opacity: 0.5, position: 'absolute', top: 0, left: 0, zIndex: 2 });
+    }
+
+    if (params.has('mariia')) {
+        name.value = 'Mariia [GL]';
+        name.classList.add('disabled');
+        name.disabled = true;
+
+        avatar.src = 'avatar/mariia.png';
+        avatar.classList.add('disabled');
+    }
+
+    if (params.has('wisely')) {
+        name.value = 'Wisely';
+        name.classList.add('disabled');
+        name.disabled = true;
+
+        avatar.src = 'avatar/wisely.png';
+        avatar.classList.add('disabled');
     }
 });
 
 class RenderImage {
-    constructor() {
+    constructor(avatar, name, message, pink, style, download = false) {
         this.canvas = document.querySelector('#canvas');
 
-        this.container = document.querySelector('.container');
-        this.box = document.querySelector('.box');
-        this.avatar = document.querySelector('.avatar');
-        this.name = document.querySelector('.name');
-        this.message = document.querySelector('.message');
+        this.container = document.querySelector('#preview');
+        this.box = document.querySelector('#preview-box');
+        this.avatar = document.querySelector('#preview-avatar');
+        this.name = document.querySelector('#preview-name');
+        this.message = document.querySelector('#preview-message');
+
+        if (style == 'phrase') {
+            this.box.classList.remove('achievement');
+        } else {
+            this.box.classList.remove('phrase');
+        }
+
+        this.box.classList.add(style);
+
+        this.avatar.src = avatar;
+        this.name.innerText = name + (style == 'phrase' ? ':' : '');
+
+        let lines = message.split("\n");
+        message = '';
+
+        for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+            let words = lines[lineIndex].split(' ');
+            let line = '';
+
+            for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
+                line += '<span>' + words[wordIndex] + '</span> ';
+            }
+
+            message += line.trim();
+
+            if (lineIndex < lines.length - 1) {
+                message += '<br>';
+            }
+        }
+
+        this.message.innerHTML = message;
+
+        if (pink) {
+            this.name.classList.add('pink');
+        } else {
+            this.name.classList.remove('pink');
+        }
 
         this.context = this.canvas.getContext('2d');
 
         this.loader = new Loader();
 
-        let avatar = this.loader.loadImage('avatar', this.avatar.src);
+        let avatarImage = this.loader.loadImage('avatar', this.avatar.src);
 
-        avatar.then(function (loaded) {
+        avatarImage.then(function (loaded) {
             this.render();
 
-            let anchor = document.createElement('a');
-            anchor.href = this.canvas.toDataURL('image/png');
-            anchor.download = 'phrases_unleashed.png';
-            anchor.click();
-        }.bind(this));
+            if (download) {
+                this.download();
+            }
+        }.bind(this, download));
     }
 
     render() {
@@ -108,9 +175,11 @@ class RenderImage {
         // Generate basic canvas
         let canvas = document.querySelector('#canvas');
         canvas.width = boxBounding.width
-            + parseInt(containerStyles.getPropertyValue('padding-left'), 10)
-            + parseInt(containerStyles.getPropertyValue('padding-right'), 10);
-        canvas.height = containerBounding.height;
+            + parseInt(boxStyles.getPropertyValue('margin-left'), 10)
+            + parseInt(boxStyles.getPropertyValue('margin-right'), 10);
+        canvas.height = boxBounding.height
+            + parseInt(boxStyles.getPropertyValue('margin-top'), 10)
+            + parseInt(boxStyles.getPropertyValue('margin-bottom'), 10);
 
         let context = canvas.getContext('2d');
 
@@ -118,7 +187,7 @@ class RenderImage {
         context.fillStyle = containerStyles.getPropertyValue('background-color');
         context.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Draw avatar
+        // Draw box
         this.roundedRect(
             context,
             boxStyles.getPropertyValue('background-color'),
@@ -130,6 +199,7 @@ class RenderImage {
             true,
         );
 
+        // Draw avatar
         context.drawImage(
             this.loader.getImage('avatar'),
             avatarBounding.left - containerBounding.left,
@@ -144,55 +214,68 @@ class RenderImage {
         context.textBaseline = 'top';
         context.fillText(
             this.name.innerText,
-            nameBounding.left - containerBounding.left + parseInt(nameStyles.getPropertyValue('padding-left'), 10),
-            nameBounding.top - containerBounding.top + parseInt(nameStyles.getPropertyValue('padding-top'), 10) + 2,
+            nameBounding.left - containerBounding.left,
+            nameBounding.top - containerBounding.top + 4,
             nameBounding.width,
             parseInt(nameStyles.getPropertyValue('font-size'), 10) * 1.18
         );
 
         // Draw message box
-        this.roundedRect(
-            context,
-            messageStyles.getPropertyValue('border-color'),
-            messageBounding.left - containerBounding.left - parseInt(messageStyles.getPropertyValue('border-left-width'), 10),
-            messageBounding.top - containerBounding.top - parseInt(messageStyles.getPropertyValue('border-top-width'), 10),
-            messageBounding.width + parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + parseInt(messageStyles.getPropertyValue('border-right-width'), 10),
-            messageBounding.height + parseInt(messageStyles.getPropertyValue('border-top-width'), 10) + parseInt(messageStyles.getPropertyValue('border-bottom-width'), 10),
-            parseInt(messageStyles.getPropertyValue('border-radius'), 10)
-            + Math.round(
-                (
-                    parseInt(messageStyles.getPropertyValue('border-left-width'), 10)
-                    + parseInt(messageStyles.getPropertyValue('border-top-width'), 10)
-                    + parseInt(messageStyles.getPropertyValue('border-right-width'), 10)
-                    + parseInt(messageStyles.getPropertyValue('border-bottom-width'), 10)
-                ) / 2
-            ),
-            true,
-        );
+        if (this.box.classList.contains('phrase')) {
+            this.roundedRect(
+                context,
+                messageStyles.getPropertyValue('border-top-color'),
+                messageBounding.left - containerBounding.left - parseInt(messageStyles.getPropertyValue('border-left-width'), 10) - 1,
+                messageBounding.top - containerBounding.top - parseInt(messageStyles.getPropertyValue('border-top-width'), 10),
+                messageBounding.width + parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + parseInt(messageStyles.getPropertyValue('border-right-width'), 10) + 2,
+                messageBounding.height + parseInt(messageStyles.getPropertyValue('border-top-width'), 10) + parseInt(messageStyles.getPropertyValue('border-bottom-width'), 10),
+                parseInt(messageStyles.getPropertyValue('border-radius'), 10) + 4,
+                true,
+            );
 
-        this.roundedRect(
-            context,
-            messageStyles.getPropertyValue('background-color'),
-            messageBounding.left - containerBounding.left,
-            messageBounding.top - containerBounding.top,
-            messageBounding.width,
-            messageBounding.height,
-            parseInt(boxStyles.getPropertyValue('border-radius'), 10),
-            true,
-        );
+            this.roundedRect(
+                context,
+                messageStyles.getPropertyValue('border-bottom-color'),
+                messageBounding.left - containerBounding.left - parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + 1,
+                messageBounding.top - containerBounding.top - parseInt(messageStyles.getPropertyValue('border-top-width'), 10),
+                messageBounding.width + parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + parseInt(messageStyles.getPropertyValue('border-right-width'), 10) - 2,
+                messageBounding.height + parseInt(messageStyles.getPropertyValue('border-top-width'), 10) + parseInt(messageStyles.getPropertyValue('border-bottom-width'), 10) - 1,
+                parseInt(messageStyles.getPropertyValue('border-radius'), 10) + 4,
+                true,
+            );
+
+            this.roundedRect(
+                context,
+                messageStyles.getPropertyValue('background-color'),
+                messageBounding.left - containerBounding.left,
+                messageBounding.top - containerBounding.top,
+                messageBounding.width,
+                messageBounding.height,
+                parseInt(boxStyles.getPropertyValue('border-radius'), 10),
+                true,
+            );
+        }
 
         // Draw message text
-        context.font = messageStyles.getPropertyValue('font-size') + ' ' + messageStyles.getPropertyValue('font-family');
+        context.font = messageStyles.getPropertyValue('font-weight') + ' '
+            + messageStyles.getPropertyValue('font-size') + ' '
+            + messageStyles.getPropertyValue('font-family');
         context.fillStyle = messageStyles.getPropertyValue('color');
         context.textBaseline = 'top';
-        this.wrapText(
-            context,
-            this.message.innerText,
-            messageBounding.left - containerBounding.left + parseInt(messageStyles.getPropertyValue('padding-left'), 10),
-            messageBounding.top - containerBounding.top + parseInt(messageStyles.getPropertyValue('padding-top'), 10) + 4,
-            messageBounding.width - parseInt(messageStyles.getPropertyValue('padding-right'), 10),
-            parseInt(messageStyles.getPropertyValue('font-size'), 10) * 1.2
-        );
+
+        for (let word of this.message.children) {
+            let wordBounding = word.getBoundingClientRect();
+
+            let x = wordBounding.left - containerBounding.left;
+            let y = wordBounding.top - containerBounding.top + 7;
+
+            for (let index = 0; index < word.innerText.length; index++) {
+                let letter = word.innerText[index];
+
+                context.fillText(letter, x, y);
+                x += context.measureText(letter).width * 0.95;
+            }
+        }
     }
 
     roundedRect(context, style, x, y, width, height, radius, fill) {
@@ -211,48 +294,11 @@ class RenderImage {
         context.fill();
     }
 
-    wrapText(context, text, x, y, maxWidth, lineHeight) {
-        let lines = text.split("\n");
-        let lineCount = 0;
-
-        for (let l = 0; l < lines.length; l++) {
-            let words = lines[l].split(' ');
-            let line = '';
-            let test;
-            let metrics;
-
-            for (let i = 0; i < words.length; i++) {
-                test = words[i];
-                metrics = context.measureText(test);
-
-                while (metrics.width > maxWidth) {
-                    // Determine how much of the word will fit
-                    test = test.substring(0, test.length - 1);
-                    metrics = context.measureText(test);
-                }
-
-                if (words[i] != test) {
-                    words.splice(i + 1, 0,  words[i].substr(test.length))
-                    words[i] = test;
-                }
-
-                test = line + words[i] + ' ';
-                metrics = context.measureText(test);
-
-                if (metrics.width > maxWidth && i > 0) {
-                    context.fillText(line, x, y);
-                    line = words[i] + ' ';
-                    y += lineHeight;
-                    lineCount++;
-                } else {
-                    line = test;
-                }
-            }
-
-            context.fillText(line, x, y);
-            y += lineHeight;
-            lineCount++;
-        }
+    download() {
+        let anchor = document.createElement('a');
+        anchor.href = this.canvas.toDataURL('image/png');
+        anchor.download = 'llpu_' + random(6) + '.png';
+        anchor.click();
     }
 }
 
@@ -281,4 +327,16 @@ class Loader {
     getImage(key) {
         return (key in this.images) ? this.images[key] : null;
     }
+}
+
+let random = (length) => {
+   let result = '';
+   var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+
+   for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+
+   return result;
 }

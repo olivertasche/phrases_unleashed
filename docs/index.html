@@ -5,103 +5,130 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Rubik&family=Roboto+Mono&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Nanum+Gothic:wght@400;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@400;500;600;700&family=Mouse+Memoirs&display=swap" rel="stylesheet">
         <link href="main.css" rel="stylesheet">
     </head>
     <body>
-        <div class="info">
-            <h1 class="pink">Lego Legacy: Phrases Unleashed</h1>
-            <ul>
-                <li>Click on the <span class="pink">Playername</span> or the <span class="pink">Message</span> to edit them.</li>
-                <li>Click on the <span class="pink">Avatar</span> to select a different Character.</li>
-                <li>Want a fancy pink <span class="pink">Playername</span>? <label class="switch"><input type="checkbox" id="pinkToggle"><span class="slider"></span></label></li>
-                <li>Emojis? Yes of course! <a href="https://emojipedia.org/" target="_blank">🥳</a>.</li>
-                <li>Click the <span class="pink">Download</span>-button when done.</li>
-            </ul>
-        </div>
-
         <div class="container">
-            <div class="box">
-                <div class="user">
-                    <img class="avatar" id="avatar" src="avatar/unknown.png" width="78" height="78">⁠
-                    <div class="name"><span id="name" contenteditable="true" spellcheck="false">Playername</span>:</div>
+            <h1>Lego Legacy: Phrases Unleashed</h1>
+
+            <div class="form">
+                <div class="form-mugshot">
+                    <div class="label">Mugshot</div>
+                    <img class="avatar" id="avatar" src="avatar/unknown.png" width="135" height="135">⁠
                 </div>
-                <div class="message" id="message" contenteditable="true" spellcheck="false">Don't be rude!</div>
+
+                <div class="form-name">
+                    <label for="name">Name (choose wisely)</label>
+                    <input id="name" type="text" value="Glowing Rainbow Unicorn">
+                </div>
+
+                <div class="form-pink">
+                    <label class="switch" for="pink">
+                        <input type="checkbox" id="pink">
+                        <div class="flipper"><div class="slider"></div></div>
+                        Do you feel like being <span class="pink">pink</span>?
+                    </label>
+                </div>
+
+                <div class="form-message">
+                    <label for="message">What is it the world needs to know?</label>
+                    <textarea id="message" placeholder="Don't be rude!"></textarea>
+                </div>
+
+                <div class="form-style">
+                    <div class="label">Oh ... and let it look like what again?</div>
+                    <label class="radio" for="style-phrase"><input type="radio" class="style" name="style" id="style-phrase" value="phrase"><div class="nub"></div> Erm ... a chat phrase?</label>
+                    <label class="radio" for="style-achievement"><input type="radio" class="style" name="style" id="style-achievement" value="achievement"><div class="nub"></div> You can do achievement too?</label>
+                </div>
+
+                <div class="form-button">
+                    <button id="generate">Generate</button>
+                </div>
             </div>
         </div>
 
-        <div class="download">
-            <button id="download">Download</button>
+        <div class="render">
             <canvas id="canvas"></canvas>
+            <div class="preview" id="preview">
+                <div class="preview-box" id="preview-box"><!--
+                    --><img class="preview-avatar" id="preview-avatar" src="avatar/unknown.png" width="68" height="68">⁠<!--
+                    --><span class="preview-name" id="preview-name"></span><!--
+                    --><span class="preview-message" id="preview-message"></span><!--
+                --></div>
+            </div>
         </div>
 
-        <div id="list" class="list" style="display: none;">
-            <img alt="Unknown" src="avatar/unknown.png">
-            <img alt="Argenta" src="avatar/argenta.png">
-            <img alt="Ash" src="avatar/ash.png">
-            <img alt="Aurora" src="avatar/aurora.png">
-            <img alt="Bart" src="avatar/bart.png">
-            <img alt="Basil" src="avatar/basil.png">
-            <img alt="Brutus" src="avatar/brutus.png">
-            <img alt="Burnabus" src="avatar/burnabus.png">
-            <img alt="CactusGirl" src="avatar/cactus.png">
-            <img alt="Chef" src="avatar/chef.png">
-            <img alt="Chicken" src="avatar/chicken.png">
-            <img alt="Chuck" src="avatar/chuck.png">
-            <img alt="Clay" src="avatar/clay.png">
-            <img alt="Clockwork" src="avatar/clockwork.png">
-            <img alt="Cold" src="avatar/cold.png">
-            <img alt="Darwin" src="avatar/darwin.png">
-            <img alt="Dummy" src="avatar/dummy.png">
-            <img alt="Dwayne" src="avatar/dwayne.png">
-            <img alt="Egon" src="avatar/egon.png">
-            <img alt="Garmadon" src="avatar/garmadon.png">
-            <img alt="Gorwell" src="avatar/gorwell.png">
-            <img alt="Governor" src="avatar/governor.png">
-            <img alt="Great White" src="avatar/greatwhite.png">
-            <img alt="Hank" src="avatar/hank.png">
-            <img alt="Hedley" src="avatar/hedley.png">
-            <img alt="HighwayMan" src="avatar/hwm.png">
-            <img alt="Hiker" src="avatar/hiker.png">
-            <img alt="Hotdog" src="avatar/hotdog.png">
-            <img alt="Iggy" src="avatar/iggy.png">
-            <img alt="Instructor" src="avatar/instructor.png">
-            <img alt="Jay" src="avatar/jay.png">
-            <img alt="Jens" src="avatar/jens.png">
-            <img alt="Jester" src="avatar/jester.png">
-            <img alt="Kai" src="avatar/kai.png">
-            <img alt="Kartofski" src="avatar/kart.png">
-            <img alt="Kelvin" src="avatar/kelvin.png">
-            <img alt="LaQuay" src="avatar/laquay.png">
-            <img alt="Leigh" src="avatar/leigh.png">
-            <img alt="Lloyd" src="avatar/lloyd.png">
-            <img alt="Locust" src="avatar/locust.png">
-            <img alt="Majisto" src="avatar/majisto.png">
-            <img alt="Nonsuch" src="avatar/nonsuch.png">
-            <img alt="Nya" src="avatar/nya.png">
-            <img alt="Peter" src="avatar/peter.png">
-            <img alt="Poppy" src="avatar/poppy.png">
-            <img alt="Primo" src="avatar/primo.png">
-            <img alt="Quincy" src="avatar/quincy.png">
-            <img alt="Ray" src="avatar/ray.png">
-            <img alt="Redbeard" src="avatar/redbeard.png">
-            <img alt="Reed" src="avatar/reed.png">
-            <img alt="Sal" src="avatar/sal.png">
-            <img alt="Scarlett" src="avatar/scar.png">
-            <img alt="Slimer" src="avatar/slimer.png">
-            <img alt="SpookyGirl" src="avatar/spooky.png">
-            <img alt="Storm" src="avatar/storm.png">
-            <img alt="Trent" src="avatar/trent.png">
-            <img alt="Valiant" src="avatar/valiant.png">
-            <img alt="Verda" src="avatar/verda.png">
-            <img alt="Willa" src="avatar/willa.png">
-            <img alt="Winston" src="avatar/winston.png">
-            <img alt="Wu" src="avatar/wu.png">
-            <img alt="Yeti" src="avatar/yeti.png">
-            <img alt="Yorick" src="avatar/yorick.png">
-            <img alt="Yuppie" src="avatar/yuppie.png">
-            <img alt="Zane" src="avatar/zane.png">
-            <img alt="Zombie" src="avatar/zombie.png">
+        <div id="avatar-layer" class="layer">
+            <div id="avatar-list" class="avatar-list">
+                <span><img alt="Unknown" src="avatar/unknown.png"></span>
+                <span><img alt="Argenta" src="avatar/argenta.png"></span>
+                <span><img alt="Ash" src="avatar/ash.png"></span>
+                <span><img alt="Aurora" src="avatar/aurora.png"></span>
+                <span><img alt="Bart" src="avatar/bart.png"></span>
+                <span><img alt="Basil" src="avatar/basil.png"></span>
+                <span><img alt="Brutus" src="avatar/brutus.png"></span>
+                <span><img alt="Burnabus" src="avatar/burnabus.png"></span>
+                <span><img alt="CactusGirl" src="avatar/cactus.png"></span>
+                <span><img alt="Chef" src="avatar/chef.png"></span>
+                <span><img alt="Chicken" src="avatar/chicken.png"></span>
+                <span><img alt="Chuck" src="avatar/chuck.png"></span>
+                <span><img alt="Clay" src="avatar/clay.png"></span>
+                <span><img alt="Clockwork" src="avatar/clockwork.png"></span>
+                <span><img alt="Cold" src="avatar/cold.png"></span>
+                <span><img alt="Darwin" src="avatar/darwin.png"></span>
+                <span><img alt="Dummy" src="avatar/dummy.png"></span>
+                <span><img alt="Dwayne" src="avatar/dwayne.png"></span>
+                <span><img alt="Egon" src="avatar/egon.png"></span>
+                <span><img alt="Garmadon" src="avatar/garmadon.png"></span>
+                <span><img alt="Gorwell" src="avatar/gorwell.png"></span>
+                <span><img alt="Governor" src="avatar/governor.png"></span>
+                <span><img alt="Great White" src="avatar/greatwhite.png"></span>
+                <span><img alt="Hank" src="avatar/hank.png"></span>
+                <span><img alt="Hedley" src="avatar/hedley.png"></span>
+                <span><img alt="HighwayMan" src="avatar/hwm.png"></span>
+                <span><img alt="Hiker" src="avatar/hiker.png"></span>
+                <span><img alt="Hotdog" src="avatar/hotdog.png"></span>
+                <span><img alt="Iggy" src="avatar/iggy.png"></span>
+                <span><img alt="Instructor" src="avatar/instructor.png"></span>
+                <span><img alt="Jay" src="avatar/jay.png"></span>
+                <span><img alt="Jens" src="avatar/jens.png"></span>
+                <span><img alt="Jester" src="avatar/jester.png"></span>
+                <span><img alt="Kai" src="avatar/kai.png"></span>
+                <span><img alt="Kartofski" src="avatar/kart.png"></span>
+                <span><img alt="Kelvin" src="avatar/kelvin.png"></span>
+                <span><img alt="LaQuay" src="avatar/laquay.png"></span>
+                <span><img alt="Leigh" src="avatar/leigh.png"></span>
+                <span><img alt="Lloyd" src="avatar/lloyd.png"></span>
+                <span><img alt="Locust" src="avatar/locust.png"></span>
+                <span><img alt="Majisto" src="avatar/majisto.png"></span>
+                <span><img alt="Nonsuch" src="avatar/nonsuch.png"></span>
+                <span><img alt="Nya" src="avatar/nya.png"></span>
+                <span><img alt="Poppy" src="avatar/poppy.png"></span>
+                <span><img alt="Primo" src="avatar/primo.png"></span>
+                <span><img alt="Quincy" src="avatar/quincy.png"></span>
+                <span><img alt="Ray" src="avatar/ray.png"></span>
+                <span><img alt="Redbeard" src="avatar/redbeard.png"></span>
+                <span><img alt="Reed" src="avatar/reed.png"></span>
+                <span><img alt="Sal" src="avatar/sal.png"></span>
+                <span><img alt="Scarlett" src="avatar/scar.png"></span>
+                <span><img alt="Slimer" src="avatar/slimer.png"></span>
+                <span><img alt="SpookyGirl" src="avatar/spooky.png"></span>
+                <span><img alt="Storm" src="avatar/storm.png"></span>
+                <span><img alt="Trent" src="avatar/trent.png"></span>
+                <span><img alt="Valiant" src="avatar/valiant.png"></span>
+                <span><img alt="Venkman" src="avatar/venkman.png"></span>
+                <span><img alt="Verda" src="avatar/verda.png"></span>
+                <span><img alt="Willa" src="avatar/willa.png"></span>
+                <span><img alt="Winston" src="avatar/winston.png"></span>
+                <span><img alt="Wu" src="avatar/wu.png"></span>
+                <span><img alt="Yeti" src="avatar/yeti.png"></span>
+                <span><img alt="Yorick" src="avatar/yorick.png"></span>
+                <span><img alt="Yuppie" src="avatar/yuppie.png"></span>
+                <span><img alt="Zane" src="avatar/zane.png"></span>
+                <span><img alt="Zombie" src="avatar/zombie.png"></span>
+            </div>
         </div>
 
         <script src="main.js"></script>
