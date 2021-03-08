@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let params = new URLSearchParams(window.location.search.toLowerCase());
     let storage = window.localStorage;
 
+    let body = document.querySelector('body');
+
     let avatar = document.querySelector('#avatar');
     let avatarLayer = document.querySelector('#avatar-layer');
     let avatarList = document.querySelector('#avatar-list');
@@ -18,10 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     avatar.addEventListener('click', function() {
         if (this.classList.contains('disabled')) { return; }
         avatarLayer.classList.add('visible');
+        body.classList.add('noscroll');
     });
 
     avatarLayer.addEventListener('click', function() {
         avatarLayer.classList.remove('visible');
+        body.classList.remove('noscroll');
     });
 
     for (let i = 0; i < avatarList.children.length; i++) {
@@ -75,14 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.assign(document.querySelector('#preview').style, { opacity: 0.5, position: 'absolute', top: 0, left: 0, zIndex: 2 });
     }
 
-    if (params.has('mariia')) {
-        name.value = 'Mariia [GL]';
-        name.classList.add('disabled');
-        name.disabled = true;
+    let presets = document.querySelectorAll('.preset-box');
 
-        avatar.src = 'avatar/mariia.png';
-        avatar.classList.add('disabled');
-    }
+    presets.forEach((preset) => {
+        preset.addEventListener('click', function() {
+            name.value = this.querySelector('.preset-name').innerText;
+            avatar.src = this.querySelector('.preset-avatar').src;
+        });
+    });
 
     if (params.has('wisely')) {
         name.value = 'Wisely';
@@ -173,7 +177,7 @@ class RenderImage {
         let messageStyles = getComputedStyle(this.message);
 
         // Generate basic canvas
-        let canvas = document.querySelector('#canvas');
+        let canvas = this.canvas;
         canvas.width = boxBounding.width
             + parseInt(boxStyles.getPropertyValue('margin-left'), 10)
             + parseInt(boxStyles.getPropertyValue('margin-right'), 10);
@@ -263,18 +267,24 @@ class RenderImage {
         context.fillStyle = messageStyles.getPropertyValue('color');
         context.textBaseline = 'top';
 
+        let modifyX = 0;
+        let modifyY = 6;
+
+        if (this.box.classList.contains('phrase')) {
+            modifyX = 0;
+            modifyY = 6;
+        }
+
         for (let word of this.message.children) {
             let wordBounding = word.getBoundingClientRect();
 
-            let x = wordBounding.left - containerBounding.left;
-            let y = wordBounding.top - containerBounding.top + 7;
+            let x = wordBounding.left - containerBounding.left + modifyX;
+            let y = wordBounding.top - containerBounding.top + modifyY;
 
-            for (let index = 0; index < word.innerText.length; index++) {
-                let letter = word.innerText[index];
-
+            [...word.innerText].forEach((letter) => {
                 context.fillText(letter, x, y);
                 x += context.measureText(letter).width * 0.95;
-            }
+            });
         }
     }
 
