@@ -390,7 +390,6 @@ label.switch input:checked + .flipper .slider:before {
     vertical-align: middle;
     font-family: 'Mouse Memoirs', sans-serif;
     font-size: 38px;
-    color: var(--white);
 }
 
 .preview-box.phrase .preview-name {
