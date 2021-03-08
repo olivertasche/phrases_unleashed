@@ -187,6 +187,7 @@ label.switch input:checked + .flipper .slider:before {
     display: block;
     width: 600px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .form {
