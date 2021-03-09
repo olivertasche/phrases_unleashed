@@ -93,7 +93,7 @@ input[type=text] {
 
 textarea {
     resize: vertical;
-    height: 196px;
+    height: 182px;
 }
 
 input[type=text].disabled,

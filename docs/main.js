@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name.value,
             message.value,
             pink.checked,
-            document.querySelector('input.style:checked').value,
+            document.querySelector('input.style:checked')?.value ?? 'phrase',
             !params.has('debug')
         );
     });
@@ -103,6 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class RenderImage {
     constructor(avatar, name, message, pink, style, download = false) {
+        if (message == '') {
+            message = '...';
+        }
+
         this.canvas = document.querySelector('#canvas');
 
         this.container = document.querySelector('#preview');
