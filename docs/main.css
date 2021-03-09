@@ -203,7 +203,7 @@ label.switch input:checked + .flipper .slider:before {
         "f f f f";
 }
 
-.form-mugshot {
+.form-avatar {
     grid-area: a;
 }
 
