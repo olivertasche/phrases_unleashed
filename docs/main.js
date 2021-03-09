@@ -96,6 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         avatar.src = 'avatar/wisely.png';
         avatar.classList.add('disabled');
+
+        document.querySelector('.presets').style.display = 'none';
     }
 });
 
