@@ -26,7 +26,7 @@
     --message-blue-border-medium: #39385d;
     --message-blue-border-dark: #333258;
 
-    --yellow: #e6d51c;
+    --yellow: #ffcd04;
 }
 
 /* Generell element styling */
@@ -46,10 +46,10 @@ body {
 
 h1 {
     margin: 0 0 16px 0;
-    font-family: 'Mouse Memoirs', sans-serif;
-    font-size: 44px;
+    font-family: 'Luckiest Guy', sans-serif;
+    font-size: 37.9px;
     font-weight: normal;
-    color: var(--pink);
+    color: var(--yellow);
 }
 
 label, div.label {
@@ -232,15 +232,16 @@ label.switch input:checked + .flipper .slider:before {
 .layer {
     display: none;
     box-sizing: border-box;
-    width: 100%;
-    height: 100%;
     opacity: 0;
     position: fixed;
     top: 0;
     left: 0;
-    padding: 100px 20px 20px 20px;
-    background-color: rgba(50, 50, 50, .5);
     margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 90px 20px 20px 20px;
+    background-color: rgba(50, 50, 50, .5);
+    backdrop-filter: blur(4px);
     transition: .4s
 }
 
@@ -270,7 +271,7 @@ label.switch input:checked + .flipper .slider:before {
     background: var(--grayish-blue-medium);
     border-radius: 16px;
     width: 608px;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 110px);
     overflow-y: auto;
 }
 
