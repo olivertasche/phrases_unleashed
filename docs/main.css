@@ -43,6 +43,22 @@ body {
     font-size: 30px;
     color: var(--white);
 }
+/*
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--purple-dark);
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+*/
 
 h1 {
     margin: 0 0 16px 0;
@@ -271,9 +287,11 @@ label.switch input:checked + .flipper .slider:before {
     padding: 10px;
     background: var(--grayish-blue-medium);
     border-radius: 16px;
-    width: 608px;
+    width: 600px;
     max-height: calc(100vh - 110px);
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--purple-dark) transparent;
 }
 
 .avatar-list span {
