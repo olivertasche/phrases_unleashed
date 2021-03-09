@@ -53,7 +53,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--purple-dark);
+    background: var(--grayish-blue-light);
     width: 10px;
     height: 10px;
     border-radius: 5px;
@@ -273,7 +273,7 @@ label.switch input:checked + .flipper .slider:before {
     left: calc(50% + 240px);
     font-family: 'Luckiest Guy', sans-serif;
     font-size: 100px;
-    color: var(--white);
+    color: var(--grayish-blue-light);
     cursor: pointer;
     transform: rotate(45deg);
 }
@@ -290,7 +290,7 @@ label.switch input:checked + .flipper .slider:before {
     max-height: calc(100vh - 110px);
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--purple-dark) transparent;
+    scrollbar-color: var(--grayish-blue-light) transparent;
 }
 
 .avatar-list span {
