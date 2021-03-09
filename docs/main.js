@@ -61,8 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    let generate = document.querySelector('#generate');
-    generate.addEventListener('click', function() {
+    document.querySelector('#generate').addEventListener('click', function() {
+        this.disabled = true;
+
         new RenderImage(
             avatar.src,
             name.value,
@@ -157,6 +158,8 @@ class RenderImage {
             if (download) {
                 this.download();
             }
+
+            document.querySelector('#generate').disabled = false;
         }.bind(this, download));
     }
 

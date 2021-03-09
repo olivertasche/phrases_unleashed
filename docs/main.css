@@ -251,15 +251,16 @@ label.switch input:checked + .flipper .slider:before {
 }
 
 .layer:before {
-    content: 'X';
+    content: '+';
     display: block;
     position: absolute;
-    top: 24px;
-    left: calc(50% + 248px);
+    top: 2px;
+    left: calc(50% + 240px);
     font-family: 'Luckiest Guy', sans-serif;
-    font-size: 60px;
+    font-size: 100px;
     color: var(--white);
     cursor: pointer;
+    transform: rotate(45deg);
 }
 
 .avatar-list {
