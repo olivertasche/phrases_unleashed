@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Generate button
     document.querySelector('#generate').addEventListener('click', function() {
         this.disabled = true;
 
@@ -74,12 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
-    if (params.has('debug')) {
-        Object.assign(document.querySelector('.render').style, { display: 'block', position: 'relative', left: 0 });
-        Object.assign(document.querySelector('#canvas').style, { display: 'block', position: 'absolute', top: 0, left: 0, zIndex: 1 });
-        Object.assign(document.querySelector('#preview').style, { opacity: 0.5, position: 'absolute', top: 0, left: 0, zIndex: 2 });
-    }
-
+    // Presets
     let presets = document.querySelectorAll('.preset-box');
 
     presets.forEach((preset) => {
@@ -89,6 +85,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Collapsable
+    let collapsables = document.querySelectorAll('.collapsable-button');
+    console.log(collapsables);
+
+    for (let i = 0; i < collapsables.length; i++) {
+        collapsables[i].addEventListener('click', function() {
+            this.classList.toggle('active');
+
+            let collapsableContent = this.parentNode.querySelector('.collapsable-content');
+
+            if (collapsableContent.style.maxHeight){
+                collapsableContent.style.maxHeight = null;
+            } else {
+                collapsableContent.style.maxHeight = collapsableContent.scrollHeight + 'px';
+            }
+        });
+    }
+
+    // Debugger
+    if (params.has('debug')) {
+        Object.assign(document.querySelector('.render').style, { display: 'block', position: 'relative', left: 0 });
+        Object.assign(document.querySelector('#canvas').style, { display: 'block', position: 'absolute', top: 0, left: 0, zIndex: 1 });
+        Object.assign(document.querySelector('#preview').style, { opacity: 0.5, position: 'absolute', top: 0, left: 0, zIndex: 2 });
+    }
+
+    // Not really hidden Easteregg
     if (params.has('wisely')) {
         name.value = 'Wisely';
         name.classList.add('disabled');

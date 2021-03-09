@@ -110,7 +110,7 @@ a {
     text-decoration: none;
 }
 
-button {
+button.fancy {
     display: block;
     height: 80px;
     padding: 8px 36px 0 36px;
@@ -130,8 +130,8 @@ button {
     transition: .1s;
 }
 
-button:active,
-button:disabled {
+button.fancy:active,
+button.fancy:disabled {
     background: var(--green-light);
     background: linear-gradient(to bottom, var(--green-light) 0%, var(--green-light) 100%);
     border-top: 6px solid var(--green-medium);
@@ -195,6 +195,7 @@ label.switch input:checked + .flipper .slider {
 label.switch input:checked + .flipper .slider:before {
     transform: translateX(26px);
 }
+
 
 /* Container */
 .container {
@@ -319,12 +320,13 @@ label.switch input:checked + .flipper .slider:before {
     box-shadow: inset 0 0 10px var(--yellow);
 }
 
-
 .presets {
 }
 
 .presets-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .preset-box {
@@ -348,6 +350,52 @@ label.switch input:checked + .flipper .slider:before {
 .preset-name {
     display: inline-block;
     vertical-align: middle;
+}
+
+.collapsable {
+    border: 2px solid var(--grayish-blue-medium);
+    border-radius: 8px;
+}
+
+.collapsable-content {
+    padding: 0 8px;
+}
+
+.collapsable-button {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-align: left;
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: 30px;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.collapsable-button::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 12px;
+    right: 12px;
+    width: 16px;
+    height: 16px;
+    background: url('img/arrow.png');
+    transition: .2s;
+}
+
+.collapsable-button.active::after {
+    transform: rotateX(180deg);
+}
+
+.collapsable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.2s ease-out;
 }
 
 
@@ -420,7 +468,6 @@ label.switch input:checked + .flipper .slider:before {
 }
 
 .preview-message {
-    vertical-align: middle;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     letter-spacing: -0.025em;
@@ -429,7 +476,7 @@ label.switch input:checked + .flipper .slider:before {
 
 .preview-box.phrase .preview-message {
     display: inline-block;
-    margin: 9px 0;
+    margin: 16px 0 8px 0;
     padding: 6px 8px 4px 8px;
     max-width: 868px;
     background: var(--message-blue-medium);
@@ -438,11 +485,12 @@ label.switch input:checked + .flipper .slider:before {
     border-bottom: 3px solid var(--message-blue-border-medium);
     border-left: 2px solid var(--message-blue-border-dark);
     border-radius: 12px;
+    vertical-align: top;
     font-size: 22px;
 }
 
 .preview-box.achievement .preview-message {
-    font-size: 24px;
-    color: var(--grayish-blue-light); */
     vertical-align: middle;
+    font-size: 24px;
+    color: var(--grayish-blue-light);
 }
