@@ -14,9 +14,9 @@ to fake said messages and let them look as close as possible to the original
 without the need of Photoshop or any other tool or particular skills.
 
 ## Features
-- Create fake phrases (basically "real" chat messages)
-- Fake Achievements
-- Save current input in LocalStorage to restore everything after reload
+- Create "screenshots" of fake chat phrases
+- Create "screenshots" of fake achievements
+- Save current data in LocalStorage to restore after reload
 - Render an image that'll be directly downloaded
 - Some Eastereggs 🐰
 
