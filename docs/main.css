@@ -421,6 +421,10 @@ label.switch input:checked + .flipper .slider:before {
     margin-top: 400px;
 }
 
+.debug .decals {
+    margin-top: 400px;
+}
+
 .debug .render {
     display: block;
     position: absolute;
