@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let body = document.querySelector('body');
 
-    let avatar = document.querySelector('#avatar');
-    let avatarLayer = document.querySelector('#avatar-layer');
-    let avatarList = document.querySelector('#avatar-list');
+    let decal = document.querySelector('#decal');
+    let decalLayer = document.querySelector('#decal-layer');
+    let decals = document.querySelector('#decals');
 
     let name = document.querySelector('#name');
     let message = document.querySelector('#message');
@@ -16,23 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let pink = document.querySelector('#pink');
     let styles = document.querySelectorAll('.style');
 
-    avatar.src = storage.getItem('avatar') ?? 'avatar/unknown.png';
-    avatar.addEventListener('click', function() {
+    decal.src = storage.getItem('decal') ?? 'decals/unknown.png';
+    decal.addEventListener('click', function() {
         if (this.classList.contains('disabled')) { return; }
-        avatarLayer.classList.add('visible');
+        decalLayer.classList.add('visible');
         body.classList.add('noscroll');
     });
 
-    avatarLayer.addEventListener('click', function() {
-        avatarLayer.classList.remove('visible');
+    decalLayer.addEventListener('click', function() {
+        decalLayer.classList.remove('visible');
         body.classList.remove('noscroll');
     });
 
-    for (let i = 0; i < avatarList.children.length; i++) {
-        avatarList.children[i].addEventListener('click', function() {
+    for (let i = 0; i < decals.children.length; i++) {
+        decals.children[i].addEventListener('click', function() {
             let src = this.querySelector('img').src;
-            avatar.src = src;
-            storage.setItem('avatar', src);
+            decal.src = src;
+            storage.setItem('decal', src);
         });
     }
 
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.disabled = true;
 
         new RenderImage(
-            avatar.src,
+            decal.src,
             name.value,
             message.value,
             pink.checked,
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     presets.forEach((preset) => {
         preset.addEventListener('click', function() {
             name.value = this.querySelector('.preset-name').innerText;
-            avatar.src = this.querySelector('.preset-avatar').src;
+            decal.src = this.querySelector('.preset-decal').src;
         });
     });
 
@@ -116,15 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
         name.classList.add('disabled');
         name.disabled = true;
 
-        avatar.src = 'avatar/wisely.png';
-        avatar.classList.add('disabled');
+        decal.src = 'decals/wisely.png';
+        decal.classList.add('disabled');
 
         document.querySelector('.presets').style.display = 'none';
     }
 });
 
 class RenderImage {
-    constructor(avatar, name, message, pink, style, download = false) {
+    constructor(decal, name, message, pink, style, download = false) {
         if (message == '') {
             message = '...';
         }
@@ -133,7 +133,7 @@ class RenderImage {
 
         this.container = document.querySelector('#preview');
         this.box = document.querySelector('#preview-box');
-        this.avatar = document.querySelector('#preview-avatar');
+        this.decal = document.querySelector('#preview-decal');
         this.name = document.querySelector('#preview-name');
         this.message = document.querySelector('#preview-message');
 
@@ -145,7 +145,7 @@ class RenderImage {
 
         this.box.classList.add(style);
 
-        this.avatar.src = avatar;
+        this.decal.src = decal;
         this.name.innerText = name + (style == 'phrase' ? ':' : '');
 
         let lines = message.split("\n");
@@ -178,9 +178,9 @@ class RenderImage {
 
         this.loader = new Loader();
 
-        let avatarImage = this.loader.loadImage('avatar', this.avatar.src);
+        let decalImage = this.loader.loadImage('decal', this.decal.src);
 
-        avatarImage.then(function (loaded) {
+        decalImage.then(function (loaded) {
             this.render();
 
             if (download) {
@@ -199,13 +199,15 @@ class RenderImage {
         let boxBounding = this.box.getBoundingClientRect();
         let boxStyles = getComputedStyle(this.box);
 
-        let avatarBounding = this.avatar.getBoundingClientRect();
+        let decalBounding = this.decal.getBoundingClientRect();
 
         let nameBounding = this.name.getBoundingClientRect();
         let nameStyles = getComputedStyle(this.name);
 
         let messageBounding = this.message.getBoundingClientRect();
         let messageStyles = getComputedStyle(this.message);
+
+        let isPhrase = this.box.classList.contains('phrase');
 
         // Generate basic canvas
         let canvas = this.canvas;
@@ -226,21 +228,21 @@ class RenderImage {
         this.roundedRect(
             context,
             boxStyles.getPropertyValue('background-color'),
-            boxBounding.left - containerBounding.left,
-            boxBounding.top - containerBounding.top,
+            boxBounding.left - containerBounding.left + .5,
+            boxBounding.top - containerBounding.top + .5,
             boxBounding.width,
             boxBounding.height,
             parseInt(boxStyles.getPropertyValue('border-radius'), 10),
             true,
         );
 
-        // Draw avatar
+        // Draw decal
         context.drawImage(
-            this.loader.getImage('avatar'),
-            avatarBounding.left - containerBounding.left,
-            avatarBounding.top - containerBounding.top,
-            avatarBounding.width,
-            avatarBounding.height
+            this.loader.getImage('decal'),
+            decalBounding.left - containerBounding.left + 1,
+            decalBounding.top - containerBounding.top + 1,
+            decalBounding.width,
+            decalBounding.height
         )
 
         // Draw name
@@ -249,43 +251,32 @@ class RenderImage {
         context.textBaseline = 'top';
         context.fillText(
             this.name.innerText,
-            nameBounding.left - containerBounding.left,
-            nameBounding.top - containerBounding.top + 4,
+            nameBounding.left - containerBounding.left + 1,
+            nameBounding.top - containerBounding.top + (isPhrase ? 8 : 11),
             nameBounding.width,
             parseInt(nameStyles.getPropertyValue('font-size'), 10) * 1.18
         );
 
         // Draw message box
-        if (this.box.classList.contains('phrase')) {
-            this.roundedRect(
-                context,
-                messageStyles.getPropertyValue('border-top-color'),
-                messageBounding.left - containerBounding.left - parseInt(messageStyles.getPropertyValue('border-left-width'), 10) - 1,
-                messageBounding.top - containerBounding.top - parseInt(messageStyles.getPropertyValue('border-top-width'), 10),
-                messageBounding.width + parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + parseInt(messageStyles.getPropertyValue('border-right-width'), 10) + 2,
-                messageBounding.height + parseInt(messageStyles.getPropertyValue('border-top-width'), 10) + parseInt(messageStyles.getPropertyValue('border-bottom-width'), 10),
-                parseInt(messageStyles.getPropertyValue('border-radius'), 10) + 4,
-                true,
-            );
-
+        if (isPhrase) {
             this.roundedRect(
                 context,
                 messageStyles.getPropertyValue('border-bottom-color'),
-                messageBounding.left - containerBounding.left - parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + 1,
-                messageBounding.top - containerBounding.top - parseInt(messageStyles.getPropertyValue('border-top-width'), 10),
-                messageBounding.width + parseInt(messageStyles.getPropertyValue('border-left-width'), 10) + parseInt(messageStyles.getPropertyValue('border-right-width'), 10) - 2,
-                messageBounding.height + parseInt(messageStyles.getPropertyValue('border-top-width'), 10) + parseInt(messageStyles.getPropertyValue('border-bottom-width'), 10) - 1,
-                parseInt(messageStyles.getPropertyValue('border-radius'), 10) + 4,
+                messageBounding.left - containerBounding.left + .5,
+                messageBounding.top - containerBounding.top + 1.5,
+                messageBounding.width,
+                messageBounding.height,
+                parseInt(messageStyles.getPropertyValue('border-radius'), 10) + 3,
                 true,
             );
 
             this.roundedRect(
                 context,
                 messageStyles.getPropertyValue('background-color'),
-                messageBounding.left - containerBounding.left,
-                messageBounding.top - containerBounding.top,
-                messageBounding.width,
-                messageBounding.height,
+                messageBounding.left - containerBounding.left + 2.5,
+                messageBounding.top - containerBounding.top + 2.5,
+                messageBounding.width - 4,
+                messageBounding.height - 5,
                 parseInt(boxStyles.getPropertyValue('border-radius'), 10),
                 true,
             );
@@ -299,11 +290,11 @@ class RenderImage {
         context.textBaseline = 'top';
 
         let modifyX = 0;
-        let modifyY = 6;
+        let modifyY = 15;
 
-        if (this.box.classList.contains('phrase')) {
+        if (isPhrase) {
             modifyX = 0;
-            modifyY = 6;
+            modifyY = 5;
         }
 
         for (let word of this.message.children) {

@@ -5,9 +5,9 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Montserrat:wght@500&family=Nanum+Gothic:wght@400&family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Montserrat:wght@500&family=Luckiest+Guy&display=swap" rel="stylesheet">
         <link href="main.css?v3.5" rel="stylesheet">
-        <link rel="shortcut icon" href="avatar/wisely.png">
+        <link rel="shortcut icon" href="decals/wisely.png">
     </head>
     <body>
         <div class="container">
@@ -16,18 +16,18 @@
             <div class="presets collapsable">
                 <button class="collapsable-button">Presets</button>
                 <div class="presets-list collapsable-content">
-                    <a class="preset-box"><img class="preset-avatar" src="avatar/mariia.png" width="32" height="32"><span class="preset-name">Mariia [GL]</span></a>
-                    <a class="preset-box"><img class="preset-avatar" src="avatar/hiker.png" width="32" height="32"><span class="preset-name">Emilian [GL]</span></a>
-                    <a class="preset-box"><img class="preset-avatar" src="avatar/benny.png" width="32" height="32"><span class="preset-name">Benny</span></a>
-                    <a class="preset-box"><img class="preset-avatar" src="avatar/unikitty.png" width="32" height="32"><span class="preset-name">Unikitty</span></a>
-                    <a class="preset-box" title="Requested by: Experge"><img class="preset-avatar" src="avatar/sikho.png" width="32" height="32"><span class="preset-name">Sikho</span></a>
+                    <a class="preset-box"><img class="preset-decal" src="decals/mariia.png" width="32" height="32"><span class="preset-name">Mariia [GL]</span></a>
+                    <a class="preset-box"><img class="preset-decal" src="decals/hiker.png" width="32" height="32"><span class="preset-name">Emilian [GL]</span></a>
+                    <a class="preset-box"><img class="preset-decal" src="decals/benny.png" width="32" height="32"><span class="preset-name">Benny</span></a>
+                    <a class="preset-box"><img class="preset-decal" src="decals/unikitty.png" width="32" height="32"><span class="preset-name">Unikitty</span></a>
+                    <a class="preset-box" title="Requested by: Experge"><img class="preset-decal" src="decals/sikho.png" width="32" height="32"><span class="preset-name">Sikho</span></a>
                 </div>
             </div>
 
             <div class="form">
-                <div class="form-avatar">
-                    <div class="label">Avatar</div>
-                    <img class="avatar" id="avatar" src="avatar/unknown.png" width="135" height="135">⁠
+                <div class="form-decal">
+                    <div class="label">Decal</div>
+                    <img class="decal" id="decal" src="decals/unknown.png" width="135" height="135">⁠
                 </div>
 
                 <div class="form-name">
@@ -64,81 +64,81 @@
             <canvas id="canvas"></canvas>
             <div class="preview" id="preview">
                 <div class="preview-box" id="preview-box"><!--
-                    --><img class="preview-avatar" id="preview-avatar" src="avatar/unknown.png" width="68" height="68"><!--
+                    --><img class="preview-decal" id="preview-decal" src="decals/unknown.png" width="68" height="68"><!--
                     --><span class="preview-name" id="preview-name"></span><!--
                     --><span class="preview-message" id="preview-message"></span><!--
                 --></div>
             </div>
         </div>
 
-        <div id="avatar-layer" class="layer">
-            <div id="avatar-list" class="avatar-list">
-                <span><img alt="Unknown" src="avatar/unknown.png"></span>
-                <span><img alt="Argenta" src="avatar/argenta.png"></span>
-                <span><img alt="Ash" src="avatar/ash.png"></span>
-                <span><img alt="Aurora" src="avatar/aurora.png"></span>
-                <span><img alt="Bart" src="avatar/bart.png"></span>
-                <span><img alt="Basil" src="avatar/basil.png"></span>
-                <span><img alt="Brutus" src="avatar/brutus.png"></span>
-                <span><img alt="Burnabus" src="avatar/burnabus.png"></span>
-                <span><img alt="CactusGirl" src="avatar/cactus.png"></span>
-                <span><img alt="Chef" src="avatar/chef.png"></span>
-                <span><img alt="Chicken" src="avatar/chicken.png"></span>
-                <span><img alt="Chuck" src="avatar/chuck.png"></span>
-                <span><img alt="Clay" src="avatar/clay.png"></span>
-                <span><img alt="Clockwork" src="avatar/clockwork.png"></span>
-                <span><img alt="Cold" src="avatar/cold.png"></span>
-                <span><img alt="Darwin" src="avatar/darwin.png"></span>
-                <span><img alt="Dummy" src="avatar/dummy.png"></span>
-                <span><img alt="Dwayne" src="avatar/dwayne.png"></span>
-                <span><img alt="Egon" src="avatar/egon.png"></span>
-                <span><img alt="Garmadon" src="avatar/garmadon.png"></span>
-                <span><img alt="Gorwell" src="avatar/gorwell.png"></span>
-                <span><img alt="Governor" src="avatar/governor.png"></span>
-                <span><img alt="Great White" src="avatar/greatwhite.png"></span>
-                <span><img alt="Hank" src="avatar/hank.png"></span>
-                <span><img alt="Hedley" src="avatar/hedley.png"></span>
-                <span><img alt="HighwayMan" src="avatar/hwm.png"></span>
-                <span><img alt="Hiker" src="avatar/hiker.png"></span>
-                <span><img alt="Hotdog" src="avatar/hotdog.png"></span>
-                <span><img alt="Iggy" src="avatar/iggy.png"></span>
-                <span><img alt="Instructor" src="avatar/instructor.png"></span>
-                <span><img alt="Jay" src="avatar/jay.png"></span>
-                <span><img alt="Jens" src="avatar/jens.png"></span>
-                <span><img alt="Jester" src="avatar/jester.png"></span>
-                <span><img alt="Kai" src="avatar/kai.png"></span>
-                <span><img alt="Kartofski" src="avatar/kart.png"></span>
-                <span><img alt="Kelvin" src="avatar/kelvin.png"></span>
-                <span><img alt="LaQuay" src="avatar/laquay.png"></span>
-                <span><img alt="Leigh" src="avatar/leigh.png"></span>
-                <span><img alt="Lloyd" src="avatar/lloyd.png"></span>
-                <span><img alt="Locust" src="avatar/locust.png"></span>
-                <span><img alt="Majisto" src="avatar/majisto.png"></span>
-                <span><img alt="Nonsuch" src="avatar/nonsuch.png"></span>
-                <span><img alt="Nya" src="avatar/nya.png"></span>
-                <span><img alt="Poppy" src="avatar/poppy.png"></span>
-                <span><img alt="Primo" src="avatar/primo.png"></span>
-                <span><img alt="Quincy" src="avatar/quincy.png"></span>
-                <span><img alt="Ray" src="avatar/ray.png"></span>
-                <span><img alt="Redbeard" src="avatar/redbeard.png"></span>
-                <span><img alt="Reed" src="avatar/reed.png"></span>
-                <span><img alt="Sal" src="avatar/sal.png"></span>
-                <span><img alt="Scarlett" src="avatar/scar.png"></span>
-                <span><img alt="Slimer" src="avatar/slimer.png"></span>
-                <span><img alt="SpookyGirl" src="avatar/spooky.png"></span>
-                <span><img alt="Storm" src="avatar/storm.png"></span>
-                <span><img alt="Trent" src="avatar/trent.png"></span>
-                <span><img alt="Valiant" src="avatar/valiant.png"></span>
-                <span><img alt="Venkman" src="avatar/venkman.png"></span>
-                <span><img alt="Verda" src="avatar/verda.png"></span>
-                <span><img alt="Willa" src="avatar/willa.png"></span>
-                <span><img alt="Winston" src="avatar/winston.png"></span>
-                <span><img alt="Wu" src="avatar/wu.png"></span>
-                <span><img alt="Yeti" src="avatar/yeti.png"></span>
-                <span><img alt="Yorick" src="avatar/yorick.png"></span>
-                <span><img alt="Yuppie" src="avatar/yuppie.png"></span>
-                <span><img alt="Zane" src="avatar/zane.png"></span>
-                <span><img alt="Zombie" src="avatar/zombie.png"></span>
+        <div id="decal-layer" class="layer">
+            <div id="decals" class="decals">
+                <span><img alt="Unknown" src="decals/unknown.png"></span>
+                <span><img alt="Argenta" src="decals/argenta.png"></span>
+                <span><img alt="Ash" src="decals/ash.png"></span>
+                <span><img alt="Aurora" src="decals/aurora.png"></span>
+                <span><img alt="Bart" src="decals/bart.png"></span>
+                <span><img alt="Basil" src="decals/basil.png"></span>
+                <span><img alt="Brutus" src="decals/brutus.png"></span>
+                <span><img alt="Burnabus" src="decals/burnabus.png"></span>
+                <span><img alt="CactusGirl" src="decals/cactus.png"></span>
+                <span><img alt="Chef" src="decals/chef.png"></span>
+                <span><img alt="Chicken" src="decals/chicken.png"></span>
+                <span><img alt="Chuck" src="decals/chuck.png"></span>
+                <span><img alt="Clay" src="decals/clay.png"></span>
+                <span><img alt="Clockwork" src="decals/clockwork.png"></span>
+                <span><img alt="Cold" src="decals/cold.png"></span>
+                <span><img alt="Darwin" src="decals/darwin.png"></span>
+                <span><img alt="Dummy" src="decals/dummy.png"></span>
+                <span><img alt="Dwayne" src="decals/dwayne.png"></span>
+                <span><img alt="Egon" src="decals/egon.png"></span>
+                <span><img alt="Garmadon" src="decals/garmadon.png"></span>
+                <span><img alt="Gorwell" src="decals/gorwell.png"></span>
+                <span><img alt="Governor" src="decals/governor.png"></span>
+                <span><img alt="Great White" src="decals/greatwhite.png"></span>
+                <span><img alt="Hank" src="decals/hank.png"></span>
+                <span><img alt="Hedley" src="decals/hedley.png"></span>
+                <span><img alt="HighwayMan" src="decals/hwm.png"></span>
+                <span><img alt="Hiker" src="decals/hiker.png"></span>
+                <span><img alt="Hotdog" src="decals/hotdog.png"></span>
+                <span><img alt="Iggy" src="decals/iggy.png"></span>
+                <span><img alt="Instructor" src="decals/instructor.png"></span>
+                <span><img alt="Jay" src="decals/jay.png"></span>
+                <span><img alt="Jens" src="decals/jens.png"></span>
+                <span><img alt="Jester" src="decals/jester.png"></span>
+                <span><img alt="Kai" src="decals/kai.png"></span>
+                <span><img alt="Kartofski" src="decals/kart.png"></span>
+                <span><img alt="Kelvin" src="decals/kelvin.png"></span>
+                <span><img alt="LaQuay" src="decals/laquay.png"></span>
+                <span><img alt="Leigh" src="decals/leigh.png"></span>
+                <span><img alt="Lloyd" src="decals/lloyd.png"></span>
+                <span><img alt="Locust" src="decals/locust.png"></span>
+                <span><img alt="Majisto" src="decals/majisto.png"></span>
+                <span><img alt="Nonsuch" src="decals/nonsuch.png"></span>
+                <span><img alt="Nya" src="decals/nya.png"></span>
+                <span><img alt="Poppy" src="decals/poppy.png"></span>
+                <span><img alt="Primo" src="decals/primo.png"></span>
+                <span><img alt="Quincy" src="decals/quincy.png"></span>
+                <span><img alt="Ray" src="decals/ray.png"></span>
+                <span><img alt="Redbeard" src="decals/redbeard.png"></span>
+                <span><img alt="Reed" src="decals/reed.png"></span>
+                <span><img alt="Sal" src="decals/sal.png"></span>
+                <span><img alt="Scarlett" src="decals/scar.png"></span>
+                <span><img alt="Slimer" src="decals/slimer.png"></span>
+                <span><img alt="SpookyGirl" src="decals/spooky.png"></span>
+                <span><img alt="Storm" src="decals/storm.png"></span>
+                <span><img alt="Trent" src="decals/trent.png"></span>
+                <span><img alt="Valiant" src="decals/valiant.png"></span>
+                <span><img alt="Venkman" src="decals/venkman.png"></span>
+                <span><img alt="Verda" src="decals/verda.png"></span>
+                <span><img alt="Willa" src="decals/willa.png"></span>
+                <span><img alt="Winston" src="decals/winston.png"></span>
+                <span><img alt="Wu" src="decals/wu.png"></span>
+                <span><img alt="Yeti" src="decals/yeti.png"></span>
+                <span><img alt="Yorick" src="decals/yorick.png"></span>
+                <span><img alt="Yuppie" src="decals/yuppie.png"></span>
+                <span><img alt="Zane" src="decals/zane.png"></span>
+                <span><img alt="Zombie" src="decals/zombie.png"></span>
             </div>
         </div>
 
