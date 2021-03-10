@@ -372,7 +372,7 @@ class RenderDecal {
 
         let images = [
             this.loader.loadImage('decal', decalDataUrl),
-            this.loader.loadImage('border', 'decals/_border.png')
+            this.loader.loadImage('border', 'decals/border.png')
         ];
 
         Promise.all(images).then(function (loaded) {
