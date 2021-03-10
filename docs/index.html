@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Montserrat:wght@500&family=Luckiest+Guy&display=swap" rel="stylesheet">
-        <link href="main.css?v3.7" rel="stylesheet">
+        <link href="main.css?v3.8" rel="stylesheet">
         <link rel="shortcut icon" href="decals/wisely.png">
     </head>
     <body>
@@ -20,7 +20,7 @@
                     <a class="preset-box"><img class="preset-decal" src="decals/hiker.png" width="32" height="32"><span class="preset-name">Emilian [GL]</span></a>
                     <a class="preset-box"><img class="preset-decal" src="decals/benny.png" width="32" height="32"><span class="preset-name">Benny</span></a>
                     <a class="preset-box"><img class="preset-decal" src="decals/unikitty.png" width="32" height="32"><span class="preset-name">Unikitty</span></a>
-                    <a class="preset-box" title="Requested by: Experge"><img class="preset-decal" src="decals/sikho.png" width="32" height="32"><span class="preset-name">Sikho</span></a>
+                    <a class="preset-box"><img class="preset-decal" src="decals/eggy.png" width="32" height="32"><span class="preset-name">Yolkano Eggsplorer Eggy</span></a>
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="form-button">
-                    <button class="fancy" id="generate">Generate</button>
+                    <button class="button-fancy" id="generate">Generate</button>
                 </div>
             </div>
         </div>
@@ -69,10 +69,16 @@
                     --><span class="preview-message" id="preview-message"></span><!--
                 --></div>
             </div>
+            <canvas id="canvas-decal"></canvas>
         </div>
 
         <div id="decal-layer" class="layer">
             <div id="decals" class="decals">
+                <div class="decal-custom">
+                    <input id="decal-custom" type="file" name="decal" accept="image/*">
+                    <label id="decal-custom-label" for="decal-custom" class="button-fancy">Upload custom decal</label>
+                    <div class="label">... or select one of these:</div>
+                </div>
                 <span><img alt="Unknown" src="decals/unknown.png"></span>
                 <span><img alt="Argenta" src="decals/argenta.png"></span>
                 <span><img alt="Ash" src="decals/ash.png"></span>
@@ -142,6 +148,6 @@
             </div>
         </div>
 
-        <script src="main.js?v3.7"></script>
+        <script src="main.js?v3.8"></script>
     </body>
 </html>

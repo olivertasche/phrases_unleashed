@@ -23,18 +23,25 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('noscroll');
     });
 
-    decalLayer.addEventListener('click', function() {
+    decalLayer.addEventListener('click', (event) => {
         decalLayer.classList.remove('visible');
         body.classList.remove('noscroll');
     });
 
-    for (let i = 0; i < decals.children.length; i++) {
-        decals.children[i].addEventListener('click', function() {
+    decals.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
+    decals.querySelectorAll('span').forEach((decalElement) => {
+        decalElement.addEventListener('click', function() {
             let src = this.querySelector('img').src;
             decal.src = src;
             storage.setItem('decal', src);
+
+            decalLayer.classList.remove('visible');
+            body.classList.remove('noscroll');
         });
-    }
+    });
 
     name.value = storage.getItem('name') ?? '';
     name.addEventListener('change', function() {
@@ -59,6 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 storage.setItem('style', this.value);
             }
         });
+    });
+
+    // Custom decal
+    let decalCustom = document.querySelector('#decal-custom');
+
+    decalCustom.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener('load', function() {
+            new RenderDecal(reader.result);
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+            decalLayer.classList.remove('visible');
+            body.classList.remove('noscroll');
+        }
     });
 
     // Generate button
@@ -337,6 +363,52 @@ class RenderImage {
         anchor.click();
     }
 }
+
+
+
+class RenderDecal {
+    constructor(decalDataUrl) {
+        this.loader = new Loader();
+
+        let images = [
+            this.loader.loadImage('decal', decalDataUrl),
+            this.loader.loadImage('border', 'decals/_border.png')
+        ];
+
+        Promise.all(images).then(function (loaded) {
+            // Generate basic canvas
+            const canvas = document.querySelector('#canvas-decal');
+            canvas.width = 128;
+            canvas.height = 128;
+
+            let context = canvas.getContext('2d');
+
+            // Draw Decal
+            this.drawImageScaled(this.loader.getImage('decal'), context);
+
+            // Draw border
+            context.drawImage(this.loader.getImage('border'), 0, 0, 128, 128);
+
+            // Set image and done
+            document.querySelector('#decal').src = canvas.toDataURL('image/png')
+        }.bind(this));
+    }
+
+    drawImageScaled(img, context) {
+        let canvas = context.canvas;
+
+        let ratio = Math.max(canvas.width / img.width, canvas.height / img.height);
+
+        let centerShiftX = (canvas.width - img.width * ratio) / 2;
+        let centerShiftY = (canvas.height - img.height * ratio) / 2;
+
+        context.drawImage(img, 0, 0, img.width, img.height, centerShiftX, centerShiftY, img.width * ratio, img.height * ratio);
+    }
+}
+
+
+
+
 
 class Loader {
     images = {}

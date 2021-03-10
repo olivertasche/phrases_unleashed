@@ -110,10 +110,9 @@ a {
     text-decoration: none;
 }
 
-button.fancy {
-    display: block;
-    height: 80px;
-    padding: 8px 36px 0 36px;
+.button-fancy {
+    display: inline-block;
+    padding: 16px 36px 8px 36px;
     font-family: 'Luckiest Guy', sans-serif;
     font-size: 36px;
     color: var(--white);
@@ -130,8 +129,8 @@ button.fancy {
     transition: .1s;
 }
 
-button.fancy:active,
-button.fancy:disabled {
+.button-fancy:active,
+.button-fancy:disabled {
     background: var(--green-light);
     background: linear-gradient(to bottom, var(--green-light) 0%, var(--green-light) 100%);
     border-top: 6px solid var(--green-medium);
@@ -318,6 +317,14 @@ label.switch input:checked + .flipper .slider:before {
     border-radius: 16px;
     transform: rotate(-10deg);
     box-shadow: inset 0 0 10px var(--yellow);
+}
+
+.decal-custom {
+    text-align: center;
+}
+
+.decal-custom input[type=file] {
+    display: none;
 }
 
 .presets {
