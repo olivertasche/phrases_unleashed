@@ -408,6 +408,76 @@ label.switch input:checked + .flipper .slider:before {
     overflow: hidden;
 }
 
+
+/* Debug */
+.debug .container {
+    margin-top: 400px;
+}
+
+.debug .render {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    overflow-y: scroll;
+    border-bottom: 4px solid var(--grayish-blue-light);
+}
+
+.debug #canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.debug #preview {
+    background-color: var(--purple-dark);
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 400px;
+}
+
+.debug input[type=range] {
+    -webkit-appearance: none;
+    position: fixed;
+    right: 16px;
+    top: 16px;
+    z-index: 3;
+    width: 200px;
+    height: 26px;
+    background: transparent;
+}
+
+.debug input[type=range]:focus {
+    outline: none;
+}
+
+.debug input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 30px;
+    border: 4px solid var(--grayish-blue-medium);
+    border-radius: 17px;
+    background: var(--white);
+    transition: .4s;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.debug input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: var(--grayish-blue-medium);
+}
+
+
 /* Rendering */
 .render {
     position: absolute;
@@ -421,8 +491,7 @@ label.switch input:checked + .flipper .slider:before {
     top: 0;
     left: 0;
     margin: 0 auto;
-    width: 1550px;
-    min-height: 1000px;
+    width: 1250px;
     background: var(--purple-dark);
 }
 
@@ -438,13 +507,13 @@ label.switch input:checked + .flipper .slider:before {
 .preview-box.phrase {
     background: var(--blue-medium);
     border-color: var(--blue-border-medium);
-    max-width: 1000px;
+    max-width: 1200px;
 }
 
 .preview-box.achievement {
     background: var(--grayish-blue-medium);
     border-color: var(--grayish-blue-border-light);
-    max-width: 1500px;
+    max-width: 1200px;
 }
 
 .preview-decal {
@@ -478,7 +547,6 @@ label.switch input:checked + .flipper .slider:before {
     display: inline-block;
     margin: 9px 0 8px 0;
     padding: 6px 8px 4px 8px;
-    max-width: 868px;
     background: var(--message-blue-medium);
     border-top: 1px solid var(--message-blue-border-medium);
     border-right: 2px solid var(--message-blue-border-dark);

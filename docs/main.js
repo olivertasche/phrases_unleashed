@@ -76,9 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Presets
-    let presets = document.querySelectorAll('.preset-box');
-
-    presets.forEach((preset) => {
+    document.querySelectorAll('.preset-box').forEach((preset) => {
         preset.addEventListener('click', function() {
             name.value = this.querySelector('.preset-name').innerText;
             decal.src = this.querySelector('.preset-decal').src;
@@ -86,11 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Collapsable
-    let collapsables = document.querySelectorAll('.collapsable-button');
-    console.log(collapsables);
-
-    for (let i = 0; i < collapsables.length; i++) {
-        collapsables[i].addEventListener('click', function() {
+    document.querySelectorAll('.collapsable-button').forEach((collapsable) => {
+        collapsable.addEventListener('click', function() {
             this.classList.toggle('active');
 
             let collapsableContent = this.parentNode.querySelector('.collapsable-content');
@@ -101,13 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 collapsableContent.style.maxHeight = collapsableContent.scrollHeight + 'px';
             }
         });
-    }
+    });
 
     // Debugger
     if (params.has('debug')) {
-        Object.assign(document.querySelector('.render').style, { display: 'block', position: 'relative', left: 0 });
-        Object.assign(document.querySelector('#canvas').style, { display: 'block', position: 'absolute', top: 0, left: 0, zIndex: 1 });
-        Object.assign(document.querySelector('#preview').style, { opacity: 0.5, position: 'absolute', top: 0, left: 0, zIndex: 2 });
+        document.querySelector('body').classList.add('debug');
+
+        let slider = document.createElement('input');
+        slider.setAttribute('type', 'range');
+        slider.setAttribute('min', 0);
+        slider.setAttribute('max', 100);
+        slider.addEventListener('input', function() {
+            console.log(this.value, this.value/100);
+            document.querySelector('#preview').style.opacity = (this.value / 100);
+        });
+
+        document.querySelector('.render').appendChild(slider);
     }
 
     // Not really hidden Easteregg
