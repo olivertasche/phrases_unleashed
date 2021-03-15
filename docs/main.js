@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let message = document.querySelector('#message');
 
     let pink = document.querySelector('#pink');
+    let pinkFlipper = document.querySelector('#pink-flipper');
+
     let styles = document.querySelectorAll('.style');
 
     decal.src = storage.getItem('decal') ?? 'decals/unknown.png';
@@ -95,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             decal.src,
             name.value,
             message.value,
-            pink.checked,
+            (params.has('wisely') ? 'yellow' : (pink.checked ? 'pink' : '')),
             document.querySelector('input.style:checked')?.value ?? 'phrase',
             !params.has('debug')
         );
@@ -149,12 +151,16 @@ document.addEventListener('DOMContentLoaded', () => {
         decal.src = 'decals/wisely.png';
         decal.classList.add('disabled');
 
+        pink.checked = false;
+        pink.disabled = true;
+        pinkFlipper.classList.add('disabled');
+
         document.querySelector('.presets').style.display = 'none';
     }
 });
 
 class RenderImage {
-    constructor(decal, name, message, pink, style, download = false) {
+    constructor(decal, name, message, color, style, download = false) {
         if (message == '') {
             message = '...';
         }
@@ -198,11 +204,7 @@ class RenderImage {
 
         this.message.innerHTML = message;
 
-        if (pink) {
-            this.name.classList.add('pink');
-        } else {
-            this.name.classList.remove('pink');
-        }
+        this.name.classList.add(color);
 
         this.context = this.canvas.getContext('2d');
 

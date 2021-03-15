@@ -101,8 +101,16 @@ textarea.disabled {
     background-color: var(--grayish-blue-medium);
 }
 
+.flipper.disabled > .slider {
+    background-color: var(--grayish-blue-light) !important;
+}
+
 .pink {
     color: var(--pink);
+}
+
+.yellow {
+    color: var(--yellow);
 }
 
 a {
