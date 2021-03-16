@@ -204,7 +204,9 @@ class RenderImage {
 
         this.message.innerHTML = message;
 
-        this.name.classList.add(color);
+        if (color != '') {
+            this.name.classList.add(color);
+        }
 
         this.context = this.canvas.getContext('2d');
 
