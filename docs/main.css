@@ -27,6 +27,7 @@
     --message-blue-border-dark: #333258;
 
     --yellow: #ffcd04;
+    --red: #86001b;
 }
 
 /* Generell element styling */
@@ -111,6 +112,10 @@ textarea.disabled {
 
 .yellow {
     color: var(--yellow);
+}
+
+.red {
+    color: var(--red);
 }
 
 a {

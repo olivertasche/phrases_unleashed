@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             decal.src,
             name.value,
             message.value,
-            (params.has('wisely') ? 'yellow' : (pink.checked ? 'pink' : '')),
+            (params.has('wisely') ? 'red' : (pink.checked ? 'pink' : '')),
             document.querySelector('input.style:checked')?.value ?? 'phrase',
             !params.has('debug')
         );
