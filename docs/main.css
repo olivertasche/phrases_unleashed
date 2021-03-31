@@ -212,7 +212,8 @@ label.switch input:checked + .flipper .slider:before {
 /* Container */
 .container {
     display: block;
-    width: 600px;
+    /*width: calc(100vw - 40px);*/
+    /*max-width: 600px;*/
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -220,7 +221,7 @@ label.switch input:checked + .flipper .slider:before {
 .form {
     display: grid;
     margin: 20px 0;
-    grid-template-columns: repeat(4, 135px);
+    grid-template-columns: repeat(4, calc(25wv - 20px));
     grid-template-rows: repeat(5, auto);
     gap: 20px 20px;
     grid-template-areas:
@@ -255,6 +256,13 @@ label.switch input:checked + .flipper .slider:before {
     grid-area: f;
     display:flex;
     justify-content: flex-end;
+}
+
+.form-decal img {
+    width: 20vw;
+    height: 20vw;
+    max-width: 135px;
+    max-height: 135px;
 }
 
 .layer {
@@ -299,8 +307,9 @@ label.switch input:checked + .flipper .slider:before {
     padding: 10px;
     background: var(--grayish-blue-medium);
     border-radius: 16px;
-    width: 600px;
-    max-height: calc(100vh - 110px);
+    /*width: calc(100vw - 40px);*/
+    /*max-width: 600px;*/
+    max-height: calc(100vh - 120px);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--grayish-blue-light) transparent;
@@ -314,8 +323,10 @@ label.switch input:checked + .flipper .slider:before {
 
 .decals span img {
     margin: 6px;
-    width: 95px;
-    height: 95px;
+    width: 20vw;
+    height: 20vw;
+    max-width: 95px;
+    max-height: 95px;
 }
 
 .decals span:hover:after {
