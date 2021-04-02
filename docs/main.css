@@ -212,8 +212,7 @@ label.switch input:checked + .flipper .slider:before {
 /* Container */
 .container {
     display: block;
-    /*width: calc(100vw - 40px);*/
-    /*max-width: 600px;*/
+    max-width: 600px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -291,7 +290,7 @@ label.switch input:checked + .flipper .slider:before {
     display: block;
     position: absolute;
     top: 2px;
-    left: calc(50% + 240px);
+    right: 30px;
     font-family: 'Luckiest Guy', sans-serif;
     font-size: 100px;
     color: var(--grayish-blue-light);
@@ -307,8 +306,7 @@ label.switch input:checked + .flipper .slider:before {
     padding: 10px;
     background: var(--grayish-blue-medium);
     border-radius: 16px;
-    /*width: calc(100vw - 40px);*/
-    /*max-width: 600px;*/
+    max-width: 600px;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
     scrollbar-width: thin;
